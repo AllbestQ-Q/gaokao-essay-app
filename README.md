@@ -76,11 +76,8 @@ python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 
 ## 运行效果
 
-初始界面：
+1. 初始界面：
 ![初始界面](pictures/56ddd840713d108cc223df1b2bb6ff2d.png)
 
-输入题目“秋”演示：
+2. 输入题目“秋”演示：
 ![输入题目“秋”](pictures/8e38324d3c4b7514f4582e71c1a398f4.png)
-
-高考满分作文规律分析报告：
-![高考满分作文规律分析报告](pictures/23981eaab30c77bf84c93b6726f132fe.png)
