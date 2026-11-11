@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高考满分作文智能应用</title>
+  <link rel="stylesheet" href="/style.css?v=2">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="logo">✒️[网安243朱含韵202401050887]</div>
+    <h1>高考满分作文智能应用</h1>
+    <p class="subtitle">输入作文题目，AI 依据从 100+ 篇满分范文中总结的写作规律，生成 800–900 字的满分水准作文</p>
+  </div>
+</header>
+
+<div id="setup-banner" class="banner hidden">
+  ⚠️ 尚未配置大模型 API Key。请编辑 <code>gaokao-essay-app/.env</code>（可从 <code>.env.example</code> 复制），填入
+  <code>OPENAI_API_KEY</code> 后重启服务。当前模型：<span id="banner-model"></span>
+</div>
+
+<main class="container">
+
+  <!-- 左侧：输入区 -->
+  <section class="card input-card">
+    <h2 class="card-title"><span class="step">①</span> 作文题目 <span class="required">*</span></h2>
+    <input id="topic" type="text" maxlength="200"
+           placeholder="例如：本手、妙手、俗手">
+
+    <h2 class="card-title">题目材料 / 写作要求 <span class="optional">（可选）</span></h2>
+    <textarea id="material" rows="7" maxlength="4000"
+              placeholder="粘贴高考题的材料与要求。例如：&#10;“本手、妙手、俗手”是围棋的三个术语……以上材料对我们颇具启示意义。请结合材料写一篇文章，体现你的感悟与思考。"></textarea>
+
+    <h2 class="card-title">文体风格</h2>
+    <div class="style-grid" id="style-grid">
+      <button class="pill active" data-style="auto">自动选择</button>
+      <button class="pill" data-style="argumentative">议论文</button>
+      <button class="pill" data-style="narrative">记叙 / 散文</button>
+      <button class="pill" data-style="letter">书信体</button>
+      <button class="pill" data-style="speech">演讲稿</button>
+      <button class="pill" data-style="classical">文言创新</button>
+    </div>
+
+    <div class="btn-row">
+      <button id="generate-btn" class="primary-btn">✨ 生成满分作文</button>
+      <button id="stop-btn" class="stop-btn hidden">■ 停止</button>
+    </div>
+    <button id="patterns-btn" class="link-btn">📖 查看满分作文规律总结（基于 20 份范文文档）</button>
+  </section>
+
+  <!-- 右侧：输出区 -->
+  <section class="card output-card">
+    <div class="output-header">
+      <h2 class="card-title"><span class="step">②</span> 生成结果 <span id="model-tag" class="model-tag"></span></h2>
+      <div class="output-actions">
+        <button id="copy-btn" class="small-btn hidden">📋 复制全文</button>
+        <button id="regen-btn" class="small-btn hidden">🔄 重新生成</button>
+      </div>
+    </div>
+
+    <div id="essay-area" class="essay-area">
+      <div id="placeholder" class="placeholder">
+        <div class="placeholder-icon">📝</div>
+        <p>作文将在这里逐字生成……</p>
+        <p class="placeholder-hint">字数目标：800 – 900 字</p>
+      </div>
+      <article id="essay" class="essay hidden"></article>
+    </div>
+
+    <div class="counter-row">
+      <div class="counter">
+        正文 <span id="char-count">0</span> 字
+        <span class="target">/ 目标 800–900</span>
+        <span id="counter-status" class="counter-status"></span>
+      </div>
+      <div class="progress"><div id="progress-bar"></div></div>
+    </div>
+
+    <div id="error-box" class="error-box hidden"></div>
+  </section>
+</main>
+
+<!-- 规律弹窗 -->
+<div id="patterns-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="modal-close" class="modal-close" title="关闭">×</button>
+    <div id="patterns-body" class="patterns-body">加载中……</div>
+  </div>
+</div>
+
+<footer class="footer">
+  高考满分作文智能应用 · FastAPI + OpenAI SDK · 规律总结自语料库《高考满分作文Word文件》（20 份文档）
+</footer>
+
+<script src="/app.js?v=2"></script>
+</body>
+</html>
