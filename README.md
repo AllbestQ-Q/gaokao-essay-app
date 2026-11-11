@@ -73,7 +73,3 @@ python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 | `GET` | `/` | 前端页面 |
 
 `/api/generate` 的 SSE 事件：`meta`（模型名）、`delta`（正文片段）、`done`（含 `char_count` / `body_char_count`）、`error`（错误信息）。
-
-## 规律总结（需求 2）
-
-语料库为 `../高考满分作文Word文件` 下的 20 份 docx，先用 `../scripts/extract_docx.py` 提取为纯文本（共 13.6 万字符），再逐篇分析归纳，产出 `patterns_analysis.md`，并将核心规律浓缩进 `app/prompt.py` 的系统提示词。要点：标题多用判断句/对偶/比喻式；开头 3–5 句入题并亮论点；议论文采用"三分论点"结构（个人—社会—国家 或 是什么—为什么—怎么办）；例后必析、忌以例代议；名言 3–6 处且位置有讲究；结尾意象收束或卒章显志；正文 800–900 字。
